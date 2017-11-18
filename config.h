@@ -5,7 +5,6 @@
 #include <X11/keysym.h>
 #include "dwm.h"
 #include "movestack.c"
-#include "mpdcontrol.c"
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -41,7 +40,7 @@ static const char *colors[][ColLast] = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -80,17 +79,19 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[]     = { "dmenu_run", "-m", dmenumon, NULL };
-static const char *termcmd[]      = { "st", "-e", "dvtm", NULL };
-static const char *abduco_run[]   = { "abduco", "run",   NULL  };
-static const char *abduco_list[]  = { "abduco", "list",  NULL  };
-static const char *abduco_watch[] = { "abduco", "watch", NULL  };
+static const char *termcmd[]            = { "st", NULL };
 
-static const char *sound_toggle[] = { "sound_control.sh", "toggle", NULL };
-static const char *sound_up[]     = { "sound_control.sh", "up",     NULL };
-static const char *sound_down[]   = { "sound_control.sh", "down",   NULL };
+static const char *chromiumcmd[]        = { "chromium", NULL };
 
-static const char *brightness_up[]   = { "xbacklight", "-inc", "10", NULL };
-static const char *brightness_down[] = { "xbacklight", "-dec", "10", NULL };
+static const char *sound_toggle[]       = { "sound_control.sh", "toggle", NULL };
+static const char *sound_up[]           = { "sound_control.sh", "up",     NULL };
+static const char *sound_down[]         = { "sound_control.sh", "down",   NULL };
+
+static const char *shot_full[]          = { "shot", NULL };
+static const char *shot_select[]        = { "shot", "-s", NULL };
+
+static const char *brightness_up[]      = { "xbacklight", "-inc", "25", NULL };
+static const char *brightness_down[]    = { "xbacklight", "-dec", "25", NULL };
 
 static Key keys[] = {
 	/* modifier         key             function        argument */
@@ -98,19 +99,19 @@ static Key keys[] = {
 	{ 0, 0x1008ff12, sspawn,     { .v = sound_toggle    } }, /* XF86XK_AudioMute */
 	{ 0, 0x1008ff13, sspawn,     { .v = sound_up        } }, /* XF86XK_AudioRaiseVolume */
 	{ 0, 0x1008ff11, sspawn,     { .v = sound_down      } }, /* XF86XK_AudioLowerVolume */
-	{ 0, 0x1008ff17, mpdchange,  { .i = +1              } }, /* XF86XK_AudioNext */
-	{ 0, 0x1008ff16, mpdchange,  { .i = -1              } }, /* XF86XK_AudioPrev */
-	{ 0, 0x1008ff14, mpdcontrol, { 0                    } }, /* XF86XK_AudioPlay */
+	//{ 0, 0x1008ff17, mpdchange,  { .i = +1              } }, /* XF86XK_AudioNext */
+	//{ 0, 0x1008ff16, mpdchange,  { .i = -1              } }, /* XF86XK_AudioPrev */
+	//{ 0, 0x1008ff14, mpdcontrol, { 0                    } }, /* XF86XK_AudioPlay */
 	{ 0, 0x1008ff02, sspawn,     { .v = brightness_up   } }, /* XF86XK_MonBrightnessUp */
 	{ 0, 0x1008ff03, sspawn,     { .v = brightness_down } }, /* XF86XK_MonBrightnessDown */
       /* 0x1008ff1b = XF86Search */
 
     /* Other keys (scroll lock is rebound using xcape) */
-	{ 0,                XK_Scroll_Lock, sspawn,         { .v  = dmenucmd     } },
-	{ MODKEY,           XK_s,           sspawn,         { .v  = abduco_run   } },
-	{ MODKEY,           XK_a,           sspawn,         { .v  = abduco_list  } },
-	{ MODKEY,           XK_w,           sspawn,         { .v  = abduco_watch } },
-	{ MODKEY|ShiftMask, XK_Return,      sspawn,         { .v  = termcmd      } },
+	{ MODKEY,           XK_p, sspawn,                   { .v  = dmenucmd     } },
+	{ MODKEY,           XK_Return,      sspawn,         { .v  = termcmd      } },
+    { MODKEY,           XK_g,           sspawn,         { .v  = chromiumcmd  } },
+    { MODKEY,           XK_s,           sspawn,         { .v  = shot_select  } },
+    { MODKEY|ShiftMask, XK_s,           sspawn,         { .v  = shot_full    } },
 	{ MODKEY,           XK_b,           togglebar,      { 0                  } },
 	{ MODKEY,           XK_j,           focusstack,     { .i  = +1           } },
 	{ MODKEY|ShiftMask, XK_j,           movestack,      { .i  = +1           } },
@@ -120,7 +121,7 @@ static Key keys[] = {
 	{ MODKEY,           XK_period,      incnmaster,     { .i  = -1           } },
 	{ MODKEY,           XK_h,           setmfact,       { .f  = -0.05        } },
 	{ MODKEY,           XK_l,           setmfact,       { .f  = +0.05        } },
-	{ MODKEY,           XK_Return,      zoom,           { 0                  } },
+	{ MODKEY|ShiftMask, XK_Return,      zoom,           { 0                  } },
 	{ MODKEY|ShiftMask, XK_c,           killclient,     { 0                  } },
 	{ MODKEY,           XK_t,           setlayout,      { .v  = &layouts[0]  } },
 	{ MODKEY,           XK_m,           setlayout,      { .v  = &layouts[1]  } },
