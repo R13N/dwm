@@ -63,7 +63,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *passcmd[] = { "passmenu", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-static const char *browsercmd[]        = { "qutebrowser", NULL };
+static const char *browsercmd[]        = { "firefox", NULL };
 
 static const char *sound_toggle[]       = { "sound_control.sh", "toggle", NULL };
 static const char *sound_up[]           = { "sound_control.sh", "up",     NULL };
