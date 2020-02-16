@@ -5,8 +5,8 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fira Mono:size=11", "Symbola:size=11" };
-static const char dmenufont[]       = "Fira Mono:size=11";
+static const char *fonts[]          = { "Fira Mono:size=13", "Symbola:size=13" };
+static const char dmenufont[]       = "Fira Mono:size=13";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -31,7 +31,7 @@ static const Rule rules[] = {
     { "idea",           NULL,       "LG3D",     0,            0,           -1 },
     { "clion",          NULL,       "LG3D",     0,            0,           -1 },
     { "idea-ultimate",  NULL,       "LG3D",     0,            0,           -1 },
-    { "ghidra",  NULL,       "LG3D",     0,            0,           -1 },
+    { "ghidra",         NULL,       "LG3D",     0,            0,           -1 },
     { "bluej",          NULL,       "LG3D",     0,            1,           -1 },
 };
 
@@ -70,8 +70,9 @@ static const char *sound_toggle[]       = { "sound_control.sh", "toggle", NULL }
 static const char *sound_up[]           = { "sound_control.sh", "up",     NULL };
 static const char *sound_down[]         = { "sound_control.sh", "down",   NULL };
 
-static const char *suspendcmd[]         = { "siesta",   NULL };
-static const char *hibernatecmd[]       = { "siesta",   "-Z",   NULL };
+static const char *lockcmd[]            = { "lockscreen",   NULL };
+static const char *suspendcmd[]         = { "siesta",       NULL };
+static const char *hibernatecmd[]       = { "siesta",       "-Z",   NULL };
 
 static const char *shot_full[]          = { "shot", NULL };
 static const char *shot_select[]        = { "shot", "-s", NULL };
@@ -105,6 +106,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_s,      sspawn,         { .v  = shot_full    } },
     { MODKEY,           XK_z,      sspawn,         { .v  = hibernatecmd } },
     { MODKEY|ShiftMask, XK_z,      sspawn,         { .v  = suspendcmd   } },
+    { MODKEY|ShiftMask, XK_l,      sspawn,         { .v  = lockcmd      } },
     { MODKEY,           XK_b,      togglebar,      { 0                  } },
     { MODKEY,           XK_j,      focusstack,     { .i  = +1           } },
     { MODKEY,           XK_k,      focusstack,     { .i  = -1           } },
