@@ -74,8 +74,8 @@ static const char *lockcmd[]            = { "lockscreen",   NULL };
 static const char *suspendcmd[]         = { "siesta",       NULL };
 static const char *hibernatecmd[]       = { "siesta",       "-Z",   NULL };
 
-static const char *shot_full[]          = { "shot", NULL };
-static const char *shot_select[]        = { "shot", "-s", NULL };
+static const char *shot_upload[]          = { "shot", "-s", NULL };
+static const char *shot_show[]        = { "shotshow", "-s", NULL };
 
 static const char *brightness_up[]      = { "xbacklight", "-inc", "10", NULL };
 static const char *brightness_down[]    = { "xbacklight", "-dec", "10", NULL };
@@ -102,8 +102,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask, XK_p,      sspawn,         { .v  = passcmd     } },
     { MODKEY,           XK_Return, spawn,          { .v  = termcmd      } },
     { MODKEY,           XK_g,      sspawn,         { .v  = browsercmd  } },
-    { MODKEY,           XK_s,      sspawn,         { .v  = shot_select  } },
-    { MODKEY|ShiftMask, XK_s,      sspawn,         { .v  = shot_full    } },
+    { MODKEY,           XK_s,      sspawn,         { .v  = shot_show  } },
+    { MODKEY|ShiftMask, XK_s,      sspawn,         { .v  = shot_upload    } },
     { MODKEY,           XK_z,      sspawn,         { .v  = hibernatecmd } },
     { MODKEY|ShiftMask, XK_z,      sspawn,         { .v  = suspendcmd   } },
     { MODKEY|ShiftMask, XK_l,      sspawn,         { .v  = lockcmd      } },
